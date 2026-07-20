@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { ChevronRight, Shield, MapPin, Check } from "lucide-react";
 import { useCartStore } from "@/lib/store/cart";
 import { createOrder } from "@/services/api/order";
+import { addToCart } from "@/services/api/cart";
 import { useAuthStore } from "@/lib/store/auth";
 
 export default function CheckoutPage() {
@@ -40,6 +41,11 @@ export default function CheckoutPage() {
 
     setLoading(true);
     setError("");
+
+    // Sync local cart items to backend cart before placing order
+    for (const item of items) {
+      await addToCart({ productId: item.productId, quantity: item.quantity }, token);
+    }
 
     const res = await createOrder(
       { address: address.trim(), note: note.trim() || undefined },

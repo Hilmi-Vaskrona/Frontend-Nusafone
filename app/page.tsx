@@ -6,6 +6,37 @@ import { ChevronRight, ShoppingBag } from "lucide-react";
 import { useCartStore } from "@/lib/store/cart";
 import { getAllProducts, getAllCategories } from "@/services/api/product";
 import type { Product, Category } from "@/types";
+import { BannerCarousel } from "@/components/home/BannerCarousel";
+
+const defaultBanners = [
+  {
+    id: 1,
+    tag: "Nusafone",
+    title: "Belanja Mudah\nHarga Terbaik",
+    description: "Temukan produk terbaik dengan penawaran menarik hanya di Nusafone!",
+    link: "/categories",
+    buttonText: "Belanja Sekarang",
+    bgGradient: "from-rose-600 via-primary to-red-800"
+  },
+  {
+    id: 2,
+    tag: "Gadget Baru",
+    title: "Upgrade Gadget Impianmu\nCicilan 0%",
+    description: "Nikmati kemudahan upgrade gadget dengan cicilan 0% dan promo cashback spesial.",
+    link: "/categories",
+    buttonText: "Cek Gadget",
+    bgGradient: "from-blue-600 via-cyan-500 to-indigo-700"
+  },
+  {
+    id: 3,
+    tag: "Cashback Spesial",
+    title: "Cashback Hingga\n1 Juta Rupiah",
+    description: "Belanja aksesoris dan smartphone pilihan hari ini dan dapatkan cashback instan.",
+    link: "/categories",
+    buttonText: "Ambil Promo",
+    bgGradient: "from-emerald-600 via-teal-500 to-primary"
+  }
+];
 
 function formatPrice(n: number) {
   return n.toLocaleString("id-ID");
@@ -71,34 +102,7 @@ export default function Home() {
 
   return (
     <div className="bg-gray-50/50 min-h-screen pb-12 font-sans selection:bg-primary/20 selection:text-primary">
-      <section className="bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
-          <div className="w-full h-[240px] md:h-[440px] rounded-3xl overflow-hidden relative shadow-2xl shadow-primary/10 group cursor-pointer">
-            <div className="absolute inset-0 bg-gradient-to-br from-rose-600 via-primary to-red-800 transition-transform duration-700 group-hover:scale-105"></div>
-            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 mix-blend-overlay"></div>
-            <div className="absolute -top-20 -left-20 w-64 h-64 bg-rose-400 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-pulse"></div>
-            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-orange-400 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-pulse delay-700"></div>
-            <div className="relative h-full flex flex-col items-center justify-center text-center text-white z-10 px-4">
-              <span className="px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-sm font-semibold mb-6 border border-white/30 uppercase tracking-wider">
-                Nusafone
-              </span>
-              <h2 className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg">
-                Belanja Mudah <br className="hidden md:block"/> Harga Terbaik
-              </h2>
-              <p className="text-lg md:text-2xl font-medium text-white/90 mb-8 max-w-2xl drop-shadow-md">
-                Temukan produk terbaik dengan penawaran menarik hanya di Nusafone!
-              </p>
-              <Link href="/categories" className="bg-white text-primary px-8 py-3.5 rounded-full font-bold text-lg hover:bg-gray-50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 group/btn">
-                Belanja Sekarang
-                <ChevronRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
-              <div className="w-10 h-2 bg-white rounded-full shadow-md"></div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <BannerCarousel banners={defaultBanners} />
 
       {categories.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-30">
